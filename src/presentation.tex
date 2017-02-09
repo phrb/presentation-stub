@@ -1,11 +1,13 @@
 \documentclass[10pt, compress, aspectratio=169]{beamer}
 
 \usetheme[numbering=fraction, progressbar=none, titleformat=smallcaps, sectionpage=none]{metropolis}
+
+\usepackage{sourcecodepro}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{listings}
 \usepackage{graphicx}
-\usepackage[brazilian]{babel}
+\usepackage[english]{babel}
 \usepackage[scale=2]{ccicons}
 \usepackage{url}
 \usepackage{relsize}
@@ -13,6 +15,15 @@
 
 \usepackage{pgfplots}
 \usepgfplotslibrary{dateplot}
+
+\definecolor{Base}{HTML}{191F26}
+\definecolor{Accent}{HTML}{157FFF}
+
+\setbeamercolor{alerted text}{fg=Accent}
+\setbeamercolor{frametitle}{bg=Base}
+
+\setsansfont[BoldFont={Source Sans Pro Semibold},
+              Numbers={OldStyle}]{Source Sans Pro}
 
 \lstset{ %
   backgroundcolor={},
@@ -24,7 +35,7 @@
   escapeinside={\%*}{*)},
   extendedchars=true,
   frame=n,
-  keywordstyle=\color{orange},
+  keywordstyle=\color{Accent},
   language=C++,
   rulecolor=\color{black},
   showspaces=false,
@@ -46,7 +57,7 @@
 
 \graphicspath{{../img/}}
 
-\title{Presentation Title}
+\title{Title Goes Here}
 \author{\footnotesize Pedro Bruel \\ {\scriptsize phrb@ime.usp.br}}
 \institute{\includegraphics[height=2cm]{imelogo}\\[0.2cm] Instituto de Matemática e Estatística \\ Universidade de São Paulo}
 \date{\scriptsize \today}
@@ -106,7 +117,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{Some CUDA Code}
+    \frametitle{Sample Code}
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
     #include <cuda_runtime.h>
 
@@ -123,8 +134,8 @@
 
     vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, numElements);
 
-    err = cudaGetLastError()
-    err = cudaDeviceSynchronize()
+    err = cudaGetLastError();
+    err = cudaDeviceSynchronize();
     if (err != cudaSuccess) { ... };
 
     err = cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
